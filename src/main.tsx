@@ -5,6 +5,7 @@ import { store } from './app/store/store';
 import { QueryProvider } from './app/providers/QueryProvider';
 import { AppRouterProvider } from './app/providers/RouterProvider';
 import './app/styles/global.css';
+import { Toaster } from 'react-hot-toast';
 
 // Невеличкий хак: синхронізуємо тему з тегом HTML при першому завантаженні сайту
 const savedTheme = (localStorage.getItem('theme') || 'dark') as 'dark' | 'light';
@@ -14,6 +15,17 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
       <QueryProvider>
+        <Toaster
+          position='top-right'
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: 'var(--bg-surface)',
+              color: 'var(--text-main)',
+              border: '1px solid var(--border-color)',
+            },
+          }}
+        />
         <AppRouterProvider />
       </QueryProvider>
     </Provider>

@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { AuthState, AuthResponse } from "./types";
+import { registerThunk } from "./authThunk";
 
 const initialState: AuthState = {
     user: null,
@@ -23,6 +24,14 @@ export const authSlice = createSlice({
             state.isLoggedIn = false;
             localStorage.removeItem('token');
         },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(registerThunk.fulfilled, (state, action) => {
+            state.user = action.payload.user;
+            state.token = action.payload.token;
+            state.isLoggedIn = true;
+            localStorage.setItem('token', action.payload.token);
+        });
     },
 });
 
