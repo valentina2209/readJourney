@@ -7,7 +7,7 @@ import { AppRouterProvider } from './app/providers/RouterProvider';
 import './app/styles/global.css';
 
 // Невеличкий хак: синхронізуємо тему з тегом HTML при першому завантаженні сайту
-const savedTheme = (localStorage.getItem('theme') || 'light') as 'light' | 'dark';
+const savedTheme = (localStorage.getItem('theme') || 'dark') as 'dark' | 'light';
 document.documentElement.setAttribute('data-theme', savedTheme);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
