@@ -1,8 +1,9 @@
-
-
-// src/pages/login/ui/LoginPage.tsx
 import { useAppDispatch, useAppSelector } from '../../../shared/model/hooks';
 import { toggleTheme } from '../../../features/theme/model/themeSlice';
+import styles from "./LoginPage.module.css"
+import { LoginForm } from '../../../features/auth/ui/LoginForm/LoginForm';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '../../../shared/routing/routes';
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
@@ -10,8 +11,17 @@ export const LoginPage = () => {
   const currentTheme = useAppSelector((state) => state.theme.theme);
 
   return (
-    <div style={{ padding: '40px', textAlign: 'center' }}>
-      <h1>Login Page (Заглушка)</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Expand your mind, reading a book</h1>
+      <LoginForm />
+      <p className={styles.registerText}>
+        Don’t have an account?
+        <Link to={ROUTES.REGISTER} className={styles.link}>
+          Register
+        </Link>
+      </p>
+      <div style={{ padding: '40px', textAlign: 'center' }}>
+      
       <p>Поточна тема у Redux: <strong>{currentTheme}</strong></p>
       
       <button 
@@ -27,5 +37,8 @@ export const LoginPage = () => {
         Змінити тему
       </button>
     </div>
+
+    </div>
+    
   );
 };
