@@ -6,14 +6,13 @@ import { RecommendedPage } from "../../pages/recommended/ui/RecommendedPage";
 import { LibraryPage } from "../../pages/library/ui/LibraryPage";
 import { ReadingPage } from "../../pages/reading/ui/ReadingPage";
 import { NotFoundPage } from "../../pages/not-found";
+import { Header } from "../../widgets/header";
 
 const MainLayout = () => {
   return (
     <div>
-      <header style={{ padding: '20px', borderBottom: '1px solid var(--text-muted)' }}>
-        [Тимчасовий Скелет Header: Logo | Nav | UserBar | Logout]
-      </header>
-      <main style={{ padding: '20px' }}>
+      <Header />
+      <main style={{ padding: '20px', maxWidth: '1280px', margin: '0 auto' }}>
           <Outlet />
       </main>
     </div> 

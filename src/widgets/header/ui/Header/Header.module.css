@@ -1,0 +1,111 @@
+.header {
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-main);
+  position: relative;
+  z-index: 100;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logoImg {
+  display: block;
+  height: 17px;
+  width: auto;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.desktopLogoutBtn {
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+.burgerBtn {
+  display: none; /* За замовчуванням приховано */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.burgerIcon,
+.closeIcon {
+  width: 28px;
+  height: 28px;
+  fill: var(--text-main);
+}
+
+/* Мобільне висувне меню (Drawer) */
+.mobileOverlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mobileMenu {
+  width: 225px;
+  height: 100%;
+  background-color: var(--bg-surface);
+  padding: 20px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.mobileNavWrapper {
+  margin-top: 100px;
+}
+
+.mobileLogoutBtn {
+  width: 100%;
+  border-radius: 30px;
+}
+
+/* === МЕДІА ЗАПИТ ДЛЯ МОБІЛОК (< 768px) === */
+@media (max-width: 767px) {
+  .desktopNav {
+    display: none; /* Ховаємо навігацію з шапки */
+  }
+
+  .desktopLogoutBtn {
+    display: none; /* Ховаємо кнопку Logout з шапки */
+  }
+
+  .burgerBtn {
+    display: flex; /* Показуємо бургер поруч із UserBar */
+  }
+}

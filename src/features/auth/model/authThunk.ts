@@ -60,3 +60,22 @@ export const loginThunk = createAsyncThunk<
         return rejectWithValue(errorMessage);
     }
 });
+
+export const logoutThunk = createAsyncThunk<void, void, { rejectValue: string }>(
+    'auth/logout',
+    async (_, { rejectWithValue }) => {
+        try {
+            await apiClient.post('/users/signout');
+            toast.success('Ви успішно вийшли з акаунту');
+        } catch (error: unknown) {
+            let errorMessage = 'Помилка під час виходу з сесії';
+            if (axios.isAxiosError(error)) {
+                errorMessage = error.response?.data?.message || errorMessage;
+            } else if (error instanceof Error) {
+                errorMessage = error.message;
+            }
+            toast.error(errorMessage);
+            return rejectWithValue(errorMessage);
+        }
+    }
+);
