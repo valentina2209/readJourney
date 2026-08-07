@@ -1,0 +1,88 @@
+.container {
+  flex: 1;
+  background-color: var(--bg-secondary, #1f1f1f);
+  border-radius: 30px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: var(--text-primary, #f9f9f9);
+}
+
+/* Пагінація */
+.pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.paginationBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  background-color: transparent;
+  color: var(--text-primary, #f9f9f9);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.paginationBtn:hover:not(:disabled) {
+  border-color: var(--text-primary, #f9f9f9);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.paginationBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.arrowIcon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+/* Список книг */
+.bookList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(137px, 1fr));
+  gap: 27px 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bookItem {
+  display: flex;
+  justify-content: center;
+}
+
+.emptyText {
+  color: var(--text-secondary, #686868);
+  font-size: 14px;
+  text-align: center;
+  margin-top: 40px;
+}

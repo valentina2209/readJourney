@@ -10,6 +10,8 @@
   --accent-green: #30b94d;
 
   --font-main: "Gilroy", "Inter", sans-serif;
+
+  --burger-color: #f9f9f9;
 }
 
 [data-theme="light"] {
@@ -21,4 +23,6 @@
   --text-muted: #686868;
 
   --border-color: rgba(31, 31, 31, 0.15);
+
+  --burger-color: #141414;
 }

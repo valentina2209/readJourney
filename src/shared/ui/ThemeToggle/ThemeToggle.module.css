@@ -1,0 +1,48 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 50%; /* 12px */
+  background-color: var(--bg-toggle, #f3f4f6);
+  color: var(--text-toggle, #374151);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.button:hover {
+  background-color: var(--bg-toggle-hover, #e5e7eb);
+}
+
+.button:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.icon {
+  width: 1.25rem; /* 20px */
+  height: 1.25rem; /* 20px */
+
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+/* Якщо темна тема задається через атрибут на html [data-theme="dark"] */
+:global([data-theme="dark"]) .button {
+  background-color: var(--bg-toggle-dark, #1f2937);
+  color: var(--text-toggle-dark, #e5e7eb);
+}
+
+:global([data-theme="dark"]) .button:hover {
+  background-color: var(--bg-toggle-dark-hover, #374151);
+}

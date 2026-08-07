@@ -48,7 +48,8 @@
 .closeIcon {
   width: 28px;
   height: 28px;
-  fill: var(--text-main);
+  stroke: var(--burger-color);
+  fill: var(--burger-color);
 }
 
 /* Мобільне висувне меню (Drawer) */

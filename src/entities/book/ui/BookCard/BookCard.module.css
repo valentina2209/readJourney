@@ -1,0 +1,55 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 137px; /* або підлаштуй під макет */
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 208px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--bg-secondary, #262626);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.imageWrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.details {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary, #f9f9f9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.author {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary, #686868);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

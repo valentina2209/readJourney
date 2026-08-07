@@ -35,6 +35,7 @@ export const LoginForm = () => {
                 label="Email:"
                 type="email"
                 placeholder="your@email.com"
+            autoComplete="email"
                 {...register('email')}
                 error={errors.email?.message}
             />
@@ -43,6 +44,7 @@ export const LoginForm = () => {
                 label="Password:"
                 type="password"
                 placeholder="*******"
+            autoComplete="current-password"
                 {...register('password')}
                 error={errors.password?.message}
             />

@@ -1,12 +1,12 @@
 import { createBrowserRouter, Navigate, Outlet, RouterProvider } from "react-router-dom"
-import { ROUTES } from "../../shared/routing/routes"
-import { RegisterPage } from "../../pages/register/ui/RegisterPage";
-import { LoginPage } from "../../pages/login/ui/LoginPage";
-import { RecommendedPage } from "../../pages/recommended/ui/RecommendedPage";
-import { LibraryPage } from "../../pages/library/ui/LibraryPage";
-import { ReadingPage } from "../../pages/reading/ui/ReadingPage";
-import { NotFoundPage } from "../../pages/not-found";
-import { Header } from "../../widgets/header";
+import { ROUTES } from "@/shared/routing/routes"
+import { RegisterPage } from "@/pages/register/ui/RegisterPage";
+import { LoginPage } from "@/pages/login/ui/LoginPage";
+import { RecommendedPage } from "@/pages/recommended/ui/RecommendedPage";
+import { LibraryPage } from "@/pages/library/ui/LibraryPage";
+import { ReadingPage } from "@/pages/reading/ui/ReadingPage";
+import { NotFoundPage } from "@/pages/not-found";
+import { Header } from "@/widgets/header";
 
 const MainLayout = () => {
   return (

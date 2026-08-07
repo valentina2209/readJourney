@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-type Theme = 'dark' | 'light';
+export type Theme = 'dark' | 'light';
 
 interface ThemeState {
   theme: Theme;
@@ -8,7 +8,11 @@ interface ThemeState {
 
 const getInitialTheme = (): Theme => {
   const savedTheme = localStorage.getItem('theme') as Theme;
-  return savedTheme || 'dark';
+  const initialTheme = savedTheme || 'dark';
+
+  document.documentElement.setAttribute('data-theme', initialTheme);
+
+  return initialTheme;
 };
 
 const initialState: ThemeState = {

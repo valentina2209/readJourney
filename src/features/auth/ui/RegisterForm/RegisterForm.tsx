@@ -41,6 +41,7 @@ export const RegisterForm = () => {
                 label="Email:"
                 type="email"
                 placeholder="your@email.com"
+            autoComplete="email"
                 {...register('email')}
                 error={errors.email?.message}
             />
@@ -49,6 +50,7 @@ export const RegisterForm = () => {
                 label="Password:"
                 type="password"
                 placeholder="......."
+            autoComplete="new-password"
                 {...register('password')}
                 error={errors.password?.message}
             />

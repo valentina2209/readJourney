@@ -1,4 +1,3 @@
-// src/widgets/header/ui/Header/Header.tsx
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAppDispatch } from '../../../../shared/model/hooks';
@@ -8,6 +7,7 @@ import { UserNav } from '../UserNav/UserNav';
 import { UserBar } from '../UserBar/UserBar';
 import { Button } from '../../../../shared/ui/button/Button';
 import styles from './Header.module.css';
+import { ThemeToggle } from '../../../../shared/ui/ThemeToggle';
 
 export const Header = () => {
   const dispatch = useAppDispatch();
@@ -37,6 +37,8 @@ export const Header = () => {
             />
           </picture>
         </Link>
+
+        <ThemeToggle />
 
         {/* Навігація для Tablet/Desktop */}
         <div className={styles.desktopNav}>
