@@ -1,50 +1,54 @@
-import { useEffect } from "react";
-import type { Book } from "../../../entities/book/model/types";
-import { useAppDispatch } from "../../../shared/model/hooks";
-import styles from './BookModal.module.css';
-import { addToLibrary } from "../../../entities/book";
+import type { Book } from "@/entities/book/model/types";
+import { addToLibrary, fetchOwnBooks } from "@/entities/book";
+import { useAppDispatch } from "@/shared/model/hooks";
+import { Modal } from "@/shared/ui/Modal/Modal";
+import toast from "react-hot-toast";
 
+import styles from './BookModal.module.css';
 interface BookModalProps {
-    book: Book;
+    book: Book | null;
+    isOpen: boolean;
     onClose: () => void;
 }
 
-export const BookModal = ({ book, onClose }: BookModalProps) => {
+export const BookModal = ({ book, isOpen, onClose }: BookModalProps) => {
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.code === 'Escape') onClose();
-        };
+    if (!book) return null;
 
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [onClose]);
+    const handleAdd = async () => {
+        try {
+            const result = await dispatch(addToLibrary(book._id));
 
-    const handleAdd = () => {
-        dispatch(addToLibrary(book._id));
-        onClose();
+            if (addToLibrary.fulfilled.match(result)) {
+                await dispatch(fetchOwnBooks(''));
+                toast.success('Book added to your library!');
+                onClose();
+            } else {
+                toast.error('Failed to add book');
+            }
+        } catch {
+            toast.error('Something went wrong');
+        }
     };
 
     return (
-        <div className={styles.backdrop} onClick={onClose}>
-            <div className={styles.modal} onClick={(event) => event.stopPropagation()}>
-                <button className={styles.closeBtn} onClick={onClose} aria-label="Close modal">
-                    <svg className={styles.closeIcon}>
-                        <use href="/icons.svg#icon-close" />
-                    </svg>
-                </button>
-
-                <img src={book.imageUrl} alt={book.title} className={styles.cover} />
-
+        <Modal isOpen={isOpen} onClose={onClose}>
+            <div className={styles.modalContent}>
+                <img
+                    src={book.imageUrl || "/images/default-cover.jpg"}
+                    alt={book.title}
+                    className={styles.cover}
+                />
+                
                 <h2 className={styles.title}>{book.title}</h2>
                 <p className={styles.author}>{book.author}</p>
                 <p className={styles.pages}>{book.totalPages}</p>
 
-                <button onClick={handleAdd} className={styles.addBtn}>
+                <button onClick={handleAdd} className={styles.addBtn} type="button">
                     Add to library
-                </button>
+                </button>  
             </div>
-        </div>
+        </Modal>
     )
 }

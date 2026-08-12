@@ -1,0 +1,103 @@
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 32px;
+  background-color: var(--color-card-bg, #1f1f1f);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 335px;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  .modalContent {
+    padding: 50px 50px 40px;
+    max-width: 500px;
+  }
+}
+
+.cover {
+  width: 140px;
+  height: 213px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.11;
+  letter-spacing: -0.02em;
+  color: var(--color-white, #f2f2f2);
+  margin: 0 0 4px 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.author {
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: -0.02em;
+  color: var(--color-text-muted, #686868);
+  margin: 0 0 4px 0;
+}
+
+.pages {
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-white, #f2f2f2);
+  margin: 0 0 20px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .author {
+    font-size: 14px;
+  }
+
+  .pages {
+    margin-bottom: 32px;
+  }
+}
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background-color: transparent;
+  border: 1px solid var(--color-border-light, rgba(242, 242, 242, 0.2));
+  border-radius: 30px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.02em;
+  color: var(--color-white, #f2f2f2);
+  cursor: pointer;
+  transition:
+    border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.addBtn:hover,
+.addBtn:focus {
+  border-color: var(--color-white, #f2f2f2);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.addBtn:active {
+  transform: scale(0.98);
+}

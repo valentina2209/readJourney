@@ -11,7 +11,7 @@ import { Toaster } from 'react-hot-toast';
 const savedTheme = (localStorage.getItem('theme') || 'dark') as 'dark' | 'light';
 document.documentElement.setAttribute('data-theme', savedTheme);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('modal-root')!).render(
   <React.StrictMode>
     <Provider store={store}>
       <QueryProvider>

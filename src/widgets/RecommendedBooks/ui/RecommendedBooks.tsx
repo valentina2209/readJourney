@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { BookCard, type Book } from '../../../entities/book';
 import { BookModal } from '../../../features/bookModal/ui/BookModal';
@@ -73,6 +72,7 @@ export const RecommendedBooks = ({
       {selectedBook && (
         <BookModal
           book={selectedBook}
+          isOpen={Boolean(selectedBook)}
           onClose={() => setSelectedBook(null)}
         />
       )}

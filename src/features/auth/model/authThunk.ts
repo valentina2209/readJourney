@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { apiClient } from "../../../shared/api/apiClient";
-import type { AuthResponse } from "./types";
+import { apiClient } from "@/shared/api/apiClient";
+import { User, type AuthResponse } from "./types";
 
 export interface RegisterPayload {
     name: string;
@@ -22,6 +22,11 @@ export const registerThunk = createAsyncThunk<
 >('auth/register', async (credentials, { rejectWithValue }) => {
     try {
         const { data } = await apiClient.post<AuthResponse>('/users/signup', credentials);
+        
+        if (data.token) {
+            localStorage.setItem('token', data.token);
+        }
+        
         toast.success('Реєстрація успішна!');
         return data;
     } catch (error: unknown) {
@@ -46,6 +51,11 @@ export const loginThunk = createAsyncThunk<
 >('auth/login', async (credential, { rejectWithValue }) => {
     try {
         const { data } = await apiClient.post<AuthResponse>('/users/signin', credential);
+        
+        if (data.token) {
+            localStorage.setItem('token', data.token);
+        }
+        
         toast.success('Авторизація успішна!');
         return data;
     } catch (error: unknown) {
@@ -66,8 +76,13 @@ export const logoutThunk = createAsyncThunk<void, void, { rejectValue: string }>
     async (_, { rejectWithValue }) => {
         try {
             await apiClient.post('/users/signout');
+
+            localStorage.removeItem('token');
+
             toast.success('Ви успішно вийшли з акаунту');
         } catch (error: unknown) {
+            localStorage.removeItem('token');
+
             let errorMessage = 'Помилка під час виходу з сесії';
             if (axios.isAxiosError(error)) {
                 errorMessage = error.response?.data?.message || errorMessage;
@@ -79,3 +94,19 @@ export const logoutThunk = createAsyncThunk<void, void, { rejectValue: string }>
         }
     }
 );
+
+export const refreshUserThunk = createAsyncThunk <
+    User,
+    void,
+    { rejectValue: string }
+    >('auth/refresh', async (_, { rejectWithValue }) => {
+        try {
+            const { data } = await apiClient.get<User>('/users/current');
+            return data;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                return rejectWithValue(error.response?.data?.message || 'Unauthorized'); 
+            }
+            return rejectWithValue('Failed to refresh user');
+        }
+})

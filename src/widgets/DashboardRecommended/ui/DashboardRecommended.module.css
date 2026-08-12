@@ -1,0 +1,87 @@
+.container {
+  background-color: var(--bg-surface, #1f1f1f);
+  border-radius: 30px;
+  padding: 20px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main, #ffffff);
+  margin: 0 0 14px 0;
+}
+
+.booksList {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px 0;
+}
+
+.bookItem {
+  width: 71px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cover {
+  width: 71px;
+  height: 107px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.bookTitle {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-main, #ffffff);
+  margin: 0 0 2px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bookAuthor {
+  font-size: 8px;
+  color: var(--text-muted, #b6b6b6);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link {
+  color: var(--text-muted, #b6b6b6);
+  font-size: 12px;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--text-main, #ffffff);
+}
+
+.arrowLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main, #ffffff);
+}
+
+.arrowIcon {
+  stroke: currentColor;
+  fill: none;
+  transition: transform 0.2s ease;
+}
+
+.arrowLink:hover .arrowIcon {
+  transform: translateX(4px);
+}

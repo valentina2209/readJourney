@@ -32,3 +32,37 @@ button {
   background: none;
   font-family: inherit;
 }
+
+/* Container - Global Style */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Mobile (від 320px гумова, від 375px фіксована адаптивна) */
+@media screen and (min-width: 375px) {
+  .container {
+    max-width: 375px;
+  }
+}
+
+/* Tablet (від 768px) */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* Desktop (від 1440px) */
+@media screen and (min-width: 1440px) {
+  .container {
+    max-width: 1280px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

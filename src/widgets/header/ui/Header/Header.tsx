@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAppDispatch } from '../../../../shared/model/hooks';
-import { logoutThunk } from '../../../../features/auth/model/authThunk';
-import { ROUTES } from '../../../../shared/routing/routes';
+import { useAppDispatch } from '@/shared/model/hooks';
+import { logoutThunk } from '@/features/auth/model/authThunk';
+import { ROUTES } from '@/shared/routing/routes';
 import { UserNav } from '../UserNav/UserNav';
 import { UserBar } from '../UserBar/UserBar';
-import { Button } from '../../../../shared/ui/button/Button';
+import { Button } from '@/shared/ui/button/Button';
+import { ThemeToggle } from '@/shared/ui/ThemeToggle';
 import styles from './Header.module.css';
-import { ThemeToggle } from '../../../../shared/ui/ThemeToggle';
+
 
 export const Header = () => {
   const dispatch = useAppDispatch();
@@ -29,9 +30,9 @@ export const Header = () => {
         {/* Logo */}
         <Link to={ROUTES.RECOMMENDED} className={styles.logoLink}>
           <picture>
-            <source media="(min-width: 768px)" srcSet="/public/images/logodes.png" />
+            <source media="(min-width: 768px)" srcSet="/images/logodes.png" />
             <img 
-              src="/public/images/logomob.png" 
+              src="/images/logomob.png" 
               alt="Read Journey Logo" 
               className={styles.logoImg}
             />

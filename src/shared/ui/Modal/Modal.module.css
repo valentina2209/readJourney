@@ -1,0 +1,84 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  padding: 40px 20px;
+  width: 100%;
+  max-width: 342px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    padding: 50px 40px;
+    max-width: 400px;
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeIcon {
+  stroke: var(--text-main);
+  transition: stroke 0.2s ease;
+}
+
+.closeBtn:hover .closeIcon {
+  stroke: var(--accent-blue);
+}
+
+/* Стилі для контенту модалки "Good job" */
+.successModalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.successImage {
+  margin-bottom: 20px;
+  object-fit: contain;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 14px;
+}
+
+.modalText {
+  font-size: 14px;
+  line-height: 1.28;
+  color: var(--text-muted);
+}
+
+.highlight {
+  color: var(--text-main);
+}

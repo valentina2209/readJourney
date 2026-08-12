@@ -17,7 +17,7 @@ export const ThemeToggle = () => {
             title={isDark ? 'Переключити на світлу тему' : 'Переключити на темну тему'}
         >
             <svg className={styles.icon}>
-                <use href={`/public/icons.svg#${isDark ? 'moon' : 'sun'}`} />
+                <use href={`/icons.svg#${isDark ? 'moon' : 'sun'}`} />
             </svg>
         </button>
         

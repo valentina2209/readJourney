@@ -1,0 +1,194 @@
+/* Прихований заголовок для семантики */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+/* Сітка сторінки */
+.pageWrapper {
+  padding-top: 10px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media screen and (min-width: 1440px) {
+  .pageWrapper {
+    flex-direction: row;
+    gap: 16px;
+    align-items: flex-start;
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media screen and (min-width: 1440px) {
+  .sidebar {
+    width: 313px;
+    flex-shrink: 0;
+  }
+}
+
+/* Recommended box */
+.recommendedBox {
+  background-color: var(--bg-surface);
+  border-radius: 30px;
+  padding: 20px;
+}
+
+.recommendedTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 14px 0;
+}
+
+.recommendedText {
+  margin: 0;
+}
+
+.recommendedLink {
+  color: var(--text-muted);
+  font-size: 14px;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.recommendedLink:hover {
+  color: var(--text-main);
+}
+
+/* Main content */
+.mainContent {
+  width: 100%;
+  background-color: var(--bg-surface);
+  border-radius: 30px;
+  padding: 20px;
+  min-height: 500px;
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 768px) {
+  .mainContent {
+    padding: 40px;
+    min-height: 650px;
+  }
+}
+
+.loadingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 300px;
+}
+
+.loadingText {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* --- Content for Success Modal ("Good job") --- */
+.successModalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.successImage {
+  margin-bottom: 20px;
+  object-fit: contain;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 14px 0;
+}
+
+.modalText {
+  font-size: 14px;
+  line-height: 1.28;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.highlightText {
+  color: var(--text-main);
+}
+
+/* --- Content for Book Details Modal --- */
+.bookModalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.coverWrapper {
+  width: 140px;
+  height: 213px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.bookCover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bookTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 4px 0;
+}
+
+.bookAuthor {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0 0 4px 0;
+}
+
+.bookPages {
+  font-size: 10px;
+  color: var(--text-main);
+  margin: 0 0 20px 0;
+}
+
+.startReadingBtn {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.startReadingBtn:hover {
+  background-color: var(--text-main);
+  color: var(--bg-surface);
+}

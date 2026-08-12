@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { AuthState, AuthResponse } from "./types";
-import { loginThunk, logoutThunk, registerThunk } from "./authThunk";
+import { loginThunk, logoutThunk, refreshUserThunk, registerThunk } from "./authThunk";
 
 const initialState: AuthState = {
     user: null,
@@ -46,6 +46,16 @@ export const authSlice = createSlice({
                 localStorage.removeItem('token');
             })
             .addCase(logoutThunk.rejected, (state) => {
+                state.user = null;
+                state.token = null;
+                state.isLoggedIn = false;
+                localStorage.removeItem('token');
+            })
+            .addCase(refreshUserThunk.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.isLoggedIn = true;
+            })
+            .addCase(refreshUserThunk.rejected, (state) => {
                 state.user = null;
                 state.token = null;
                 state.isLoggedIn = false;
