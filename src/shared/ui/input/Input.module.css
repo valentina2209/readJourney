@@ -5,52 +5,95 @@
   width: 100%;
 }
 
-.label {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
+/* Контейнер інпута (сіра картка) */
 .inputWrapper {
   position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
-}
-
-.input {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 12px;
   background-color: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 14px 14px;
   border: 1px solid transparent;
-  color: var(--text-main);
-  font-family: var(--font-main);
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.input::placeholder {
-  color: var(--text-muted);
-}
-
-.input:focus {
+.inputWrapper:focus-within {
   border-color: var(--border-color);
 }
 
-.inputError {
+/* Якщо є помилка — підсвічуємо рамку червоним/акцентним */
+.inputWrapperHasError {
   border-color: #e74c3c;
 }
 
-.errorMessage {
-  font-size: 10px;
-  color: #e74c3c;
-  padding-left: 4px;
+/* Лейбл всередині інпута (Mail:, Password:, Name:) */
+.label {
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: -0.02em;
+  color: var(--text-muted);
+  margin-right: 8px;
+  white-space: nowrap;
 }
 
+/* Поле вводу */
+.input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  padding: 0;
+}
+
+.input::placeholder {
+  color: var(--text-main);
+  opacity: 1;
+}
+
+/* Правий елемент (іконка ока) */
 .rightElement {
-  position: absolute;
-  right: 16px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+/* Текст помилки під інпутом */
+.errorMessage {
+  font-family: var(--font-main);
+  font-size: 10px;
+  color: #e74c3c;
+  margin-left: 14px;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--bg-secondary) inset !important;
+  -webkit-text-fill-color: var(--text-main) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+@media screen and (min-width: 768px) {
+  .inputWrapper {
+    padding: 16px 18px;
+    border-radius: 12px;
+  }
+
+  .label,
+  .input {
+    font-size: 14px;
+    line-height: 1.28;
+  }
 }

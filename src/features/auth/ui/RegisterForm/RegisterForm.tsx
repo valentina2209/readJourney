@@ -1,16 +1,20 @@
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../../shared/model/hooks"
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/shared/model/hooks"
 import { useForm } from "react-hook-form";
 import { registerSchema, type RegisterFormData } from "../../model/registerSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerThunk } from "../../model/authThunk";
-import styles from './RegisterForm.module.css';
-import { Input } from "../../../../shared/ui/input/Input";
-import { Button } from "../../../../shared/ui/button/Button";
+import { Input } from "@/shared/ui/input/Input";
+import { Button } from "@/shared/ui/button/Button";
+import { ROUTES } from "@/shared/routing/routes";
+import { useState } from "react";
+import styles from '../styles/AuthForm.module.css';
 
 export const RegisterForm = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const {
         register,
@@ -48,20 +52,38 @@ export const RegisterForm = () => {
 
             <Input
                 label="Password:"
-                type="password"
-                placeholder="......."
-            autoComplete="new-password"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="*******"
+                autoComplete="current-password"
                 {...register('password')}
                 error={errors.password?.message}
+                rightElement={
+                   <button
+                        type="button"
+                        className={styles.eyeBtn}
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        aria-label="Toggle password visibility"
+                    >
+                        <svg className={styles.eyeIcon}>
+                            <use href={`/icons.svg#icon-eye${showPassword ? '' : '-off'}`} />
+                        </svg>
+                    </button> 
+                }
             />
 
-            <Button
-                type="submit"
-                className={styles.submitBtn}
-                disabled={isSubmitting}
-            >
-              Registration  
-            </Button>
+            <div className={styles.controls}>
+                <Button
+                    type="submit"
+                    className={styles.submitBtn}
+                    disabled={isSubmitting}
+                >
+                    Registration  
+                </Button>
+                <Link to={ROUTES.LOGIN} className={styles.switchLink}>
+                    Already have an account?
+                </Link>  
+            </div>
+          
         </form>
     )
 }
