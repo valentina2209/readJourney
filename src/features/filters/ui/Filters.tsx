@@ -7,34 +7,46 @@ export const Filters = ({ onApplyFilters }: FiltersProps) => {
     const { register, handleSubmit } = useForm<FiltersFormData>();
 
     return (
+       
         <form onSubmit={handleSubmit(onApplyFilters)} className={styles.form}>
-            <p className={styles.title}>Filters</p>
+            
+                <p className={styles.title}>Filters:</p>
 
-            <div className={styles.inputGroup}>
-                <label className={styles.label}>Book title</label>
-
-                <input 
-                    {...register('title')}
-                    type='text'
-                    placeholder='Enter text'
-                    className={styles.input}
-                />
-            </div>
-
-            <div className={styles.inputGroup}>
-                <label className={styles.label}>The author's name:</label>
-
-                <input 
-                    {...register('author')}
-                    type='text'
-                    placeholder='Enter text'
-                    className={styles.input}
-                />
+            <div className={styles.inputsWrapper}>
+                <div className={styles.inputField}>
+                    <label className={styles.label} htmlFor='title'>
+                        Book title:
+                    </label>
+                    <input 
+                        {...register('title')}
+                        id='title'
+                        type='text'
+                        placeholder='Enter text'
+                        className={styles.input}
+                        autoComplete='off'
+                    />
+                </div>
+                <div className={styles.inputField}>
+                    <label className={styles.label} htmlFor='author'>
+                        The author:
+                    </label>
+                    <input 
+                        {...register('author')}
+                        id='author'
+                        type='text'
+                        placeholder='Enter text'
+                        className={styles.input}
+                        autoComplete='off'
+                    />
+                </div>
             </div>
 
             <button type='submit' className={styles.submitBtn}>
                 To apply
             </button>
-        </form>
+            
+            
+            </form>
+       
     )
 }

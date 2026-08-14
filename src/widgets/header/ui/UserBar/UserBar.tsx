@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../../../shared/model/hooks';
+import { useAppSelector } from '@/shared/model/hooks';
 import styles from './UserBar.module.css';
 
 export const UserBar = () => {

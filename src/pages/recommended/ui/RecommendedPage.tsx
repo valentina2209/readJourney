@@ -32,19 +32,25 @@ export const RecommendedPage = () => {
   }
 
   return (
-    <main className={styles.pageLayout}>
-      <Dashboard>
-        <Filters onApplyFilters={handleApplyFilters} />
-        <RecommendedGuide />
-        <QuoteBlock />
-      </Dashboard>
-
-      <RecommendedBooks 
-        books={books}
-        page={page}
-        totalPages={totalPages}
-        onPageChange={(newPage) => setPage(newPage)}
-      />
-   </main>
+    <div className='container'>
+      <div className={styles.wrapper}>
+         <Dashboard>
+          <div className={styles.dashboard}>
+            <Filters onApplyFilters={handleApplyFilters} />
+            <RecommendedGuide />
+            <QuoteBlock />
+          </div>
+        </Dashboard> 
+      
+        <div className={styles.recommendedSection}>
+          <RecommendedBooks 
+            books={books}
+            page={page}
+            totalPages={totalPages}
+            onPageChange={(newPage) => setPage(newPage)}
+          />
+        </div>
+      </div>
+    </div>
   );
 };

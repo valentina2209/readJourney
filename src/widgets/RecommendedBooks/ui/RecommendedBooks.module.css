@@ -1,30 +1,36 @@
-.container {
-  flex: 1;
-  background-color: var(--bg-secondary, #1f1f1f);
+/* =========================================================
+   1. MOBILE FIRST (320px - 767px)
+   ========================================================= */
+.section {
+  background-color: var(--bg-surface); /* #1f1f1f */
   border-radius: 30px;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
+  padding: 40px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 28px;
+  justify-content: space-between;
+  margin-bottom: 22px;
 }
 
 .title {
-  font-size: 28px;
+  font-family: var(--font-main);
+  font-size: 20px;
   font-weight: 700;
-  line-height: 1.14;
+  line-height: 1;
   letter-spacing: -0.02em;
-  color: var(--text-primary, #f9f9f9);
+  color: var(--text-main);
+  margin: 0;
 }
 
-/* Пагінація */
+/* Круглі кнопки пагінації */
 .pagination {
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 
@@ -32,21 +38,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 1px solid rgba(249, 249, 249, 0.2);
-  background-color: transparent;
-  color: var(--text-primary, #f9f9f9);
+  background: transparent;
+  border: 1px solid var(--border-color);
   cursor: pointer;
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease;
+  padding: 0;
+  transition: all 0.25s ease;
 }
 
-.paginationBtn:hover:not(:disabled) {
-  border-color: var(--text-primary, #f9f9f9);
-  background-color: rgba(255, 255, 255, 0.05);
+.paginationBtn:hover:not(:disabled),
+.paginationBtn:focus:not(:disabled) {
+  border-color: var(--text-main);
 }
 
 .paginationBtn:disabled {
@@ -57,32 +61,113 @@
 .arrowIcon {
   width: 16px;
   height: 16px;
+  stroke: var(--text-main);
   fill: none;
-  stroke: currentColor;
 }
 
 .rotate {
   transform: rotate(180deg);
 }
 
-/* Список книг */
+/* Сітка книг на мобільці */
 .bookList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(137px, 1fr));
-  gap: 27px 20px;
-  list-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 21px 20px;
   padding: 0;
   margin: 0;
+  list-style: none;
 }
 
 .bookItem {
-  display: flex;
-  justify-content: center;
+  width: 137px; /* Ширина згідно з макетом */
+}
+
+/* КЛЮЧОВИЙ МОМЕНТ: Ховаємо всі книги після 2-ї на мобільному екрані */
+.bookItem:nth-child(n + 3) {
+  display: none;
 }
 
 .emptyText {
-  color: var(--text-secondary, #686868);
+  font-family: var(--font-main);
   font-size: 14px;
+  line-height: 1.28;
+  color: var(--text-muted);
   text-align: center;
-  margin-top: 40px;
+  margin: 40px 0;
+}
+
+/* =========================================================
+   2. TABLET (768px - 1279px)
+   ========================================================= */
+@media screen and (min-width: 768px) {
+  .section {
+    padding: 40px 32px;
+    margin-top: 0;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .header {
+    margin-bottom: 20px;
+  }
+
+  .paginationBtn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .arrowIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .bookList {
+    flex-wrap: wrap;
+    gap: 27px 25px;
+  }
+
+  .bookItem {
+    width: 137px;
+  }
+
+  /* Показуємо більше книг на планшеті (наприклад, до 8 або скільки прийшло) */
+  .bookItem:nth-child(n + 3) {
+    display: block;
+  }
+
+  /* Якщо на планшеті є обмеження, наприклад, 8 книг: */
+  .bookItem:nth-child(n + 9) {
+    display: none;
+  }
+}
+
+/* =========================================================
+   3. DESKTOP (1280px+)
+   ========================================================= */
+@media screen and (min-width: 1440px) {
+  .section {
+    padding: 40px 40px 20px 40px;
+  }
+
+  .bookList {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .bookItem {
+    width: 137px;
+  }
+
+  /* Показуємо всі книги для десктопа (або до 10 шт) */
+  .bookItem:nth-child(n + 3),
+  .bookItem:nth-child(n + 9) {
+    display: block;
+  }
+
+  .bookItem:nth-child(n + 11) {
+    display: none;
+  }
 }

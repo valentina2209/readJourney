@@ -3,12 +3,17 @@ import styles from './QuoteBlock.module.css'
 export const QuoteBlock = () => {
     return (
         <div className={styles.quoteCard}>
-            <div className={styles.avatar}>📚</div>
+            <picture className={styles.picture}>
+                <img
+                    src="/images/books@1x.webp"
+                    alt="Books"
+                    className={styles.booksImage}
+                />
+            </picture>
             <p className={styles.text}>
-                "Books are the quietest and most constant of friends; they are the most accessible and wisest of counselors, and the most patient of teachers."
-            </p>
-
-            <span className={styles.author}>- Benjamin Franklin</span>
+                "Books are <span className={styles.highlight}>windows </span>
+                 to the world, and reading is a journey into the unknown."
+            </p> 
         </div>
     )
 }

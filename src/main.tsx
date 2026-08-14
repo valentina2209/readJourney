@@ -6,10 +6,13 @@ import { QueryProvider } from './app/providers/QueryProvider';
 import { AppRouterProvider } from './app/providers/RouterProvider';
 import './app/styles/global.css';
 import { Toaster } from 'react-hot-toast';
+import { refreshUserThunk } from './features/auth/model/authThunk';
 
 // Невеличкий хак: синхронізуємо тему з тегом HTML при першому завантаженні сайту
 const savedTheme = (localStorage.getItem('theme') || 'dark') as 'dark' | 'light';
 document.documentElement.setAttribute('data-theme', savedTheme);
+
+store.dispatch(refreshUserThunk());
 
 ReactDOM.createRoot(document.getElementById('modal-root')!).render(
   <React.StrictMode>

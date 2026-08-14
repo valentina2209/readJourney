@@ -81,7 +81,7 @@
 <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none">
   <path 
     d="M9 5L16 12L9 19" 
-    stroke="currentColor" 
+    stroke="white" 
     stroke-width="2" 
     stroke-linecap="round" 
     stroke-linejoin="round"
@@ -91,7 +91,7 @@
 <symbol id="icon-arrow" viewBox="0 0 24 24" fill="none">
   <path 
     d="M5 12H19M19 12L13 6M19 12L13 18" 
-    stroke="currentColor" 
+    stroke="white" 
     stroke-width="2" 
     stroke-linecap="round" 
     stroke-linejoin="round"

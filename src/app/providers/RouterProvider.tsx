@@ -10,9 +10,9 @@ import { Header } from "@/widgets/header";
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="container">
       <Header />
-      <main style={{ padding: '20px', maxWidth: '1280px', margin: '0 auto' }}>
+      <main>
           <Outlet />
       </main>
     </div> 

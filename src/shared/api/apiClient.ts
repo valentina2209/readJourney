@@ -15,11 +15,28 @@ apiClient.interceptors.request.use(
             config.headers.Authorization = `Bearer ${token}`;
         } else if (config.headers) {
             delete config.headers.Authorization;
-        }   
+        }
     
         return config;
     },
     (error) => {
+        return Promise.reject(error);
+    }
+);
+
+apiClient.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    (error) => {
+        if (error.response && error.response.status === 401) {
+            localStorage.removeItem('token');
+
+            if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+                window.location.href = '/login';
+            }
+        }
+
         return Promise.reject(error);
     }
 )

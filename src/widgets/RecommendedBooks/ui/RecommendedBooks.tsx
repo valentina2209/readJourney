@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { BookCard, type Book } from '../../../entities/book';
-import { BookModal } from '../../../features/bookModal/ui/BookModal';
+import { BookCard, type Book } from '@/entities/book';
+import { BookModal } from '@/features/bookModal/ui/BookModal';
 import styles from './RecommendedBooks.module.css';
 
 interface RecommendedBooksProps {
@@ -16,14 +16,13 @@ export const RecommendedBooks = ({
   totalPages,
   onPageChange,
 }: RecommendedBooksProps) => {
-  // Стейт для збереження обраної книги, щоб відкрити модальне вікно
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
   const isFirstPage = page <= 1;
   const isLastPage = page >= totalPages;
 
   return (
-    <section className={styles.container}>
+    <section className={styles.section} >
       <div className={styles.header}>
         <h2 className={styles.title}>Recommended</h2>
 
@@ -65,7 +64,9 @@ export const RecommendedBooks = ({
           ))}
         </ul>
       ) : (
-        <p className={styles.emptyText}>No books found matching your criteria.</p>
+          <p className={styles.emptyText}>
+            No books found matching your criteria.
+          </p>
       )}
 
       {/* Модальне вікно деталей книги */}

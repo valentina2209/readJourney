@@ -1,62 +1,74 @@
+/* =========================================================
+   1. MOBILE (320px - 767px)
+   ========================================================= */
 .header {
-  border-bottom: 1px solid var(--border-color);
-  background-color: var(--bg-main);
-  position: relative;
-  z-index: 100;
+  padding-top: 20px;
+  background-color: transparent;
 }
 
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 16px 20px;
+.headerContent {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: var(--bg-surface, #1f1f1f);
+  border-radius: 15px;
+  padding: 11px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 .logoLink {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
-.logoImg {
-  display: block;
+.logoMobile {
+  width: 42px;
   height: 17px;
-  width: auto;
+  fill: var(--text-main, #fca311);
+}
+
+.logoDesktop {
+  display: none;
+}
+
+.desktopNav,
+.desktopLogoutBtn,
+.desktopThemeToggle {
+  display: none;
 }
 
 .userSection {
   display: flex;
   align-items: center;
-  gap: 16px;
-}
-
-.desktopLogoutBtn {
-  padding: 10px 20px;
-  border-radius: 30px;
+  gap: 10px;
 }
 
 .burgerBtn {
-  display: none; /* За замовчуванням приховано */
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.burgerIcon,
-.closeIcon {
+.burgerIcon {
   width: 28px;
   height: 28px;
-  stroke: var(--burger-color);
-  fill: var(--burger-color);
+  stroke: var(--text-main, #ffffff);
 }
 
-/* Мобільне висувне меню (Drawer) */
+/* =========================================================
+   MOBILE MENU OVERLAY & DRAWER
+   ========================================================= */
 .mobileOverlay {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
@@ -66,15 +78,16 @@
 }
 
 .mobileMenu {
-  width: 225px;
+  width: 50%;
+  min-width: 200px;
   height: 100%;
-  background-color: var(--bg-surface);
+  background-color: var(--bg-surface, #262626);
   padding: 20px 20px 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
   position: relative;
+  box-sizing: border-box;
 }
 
 .closeBtn {
@@ -87,26 +100,96 @@
   cursor: pointer;
 }
 
+.closeIcon {
+  width: 28px;
+  height: 28px;
+  stroke: var(--text-main, #ffffff);
+}
+
 .mobileNavWrapper {
   margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobileMenuFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
 }
 
 .mobileLogoutBtn {
   width: 100%;
   border-radius: 30px;
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-main, #ffffff);
+  background: transparent;
 }
 
-/* === МЕДІА ЗАПИТ ДЛЯ МОБІЛОК (< 768px) === */
-@media (max-width: 767px) {
-  .desktopNav {
-    display: none; /* Ховаємо навігацію з шапки */
+/* =========================================================
+   2. TABLET (768px - 1279px)
+   ========================================================= */
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .header {
+    padding-top: 32px;
   }
 
-  .desktopLogoutBtn {
-    display: none; /* Ховаємо кнопку Logout з шапки */
+  .headerContent {
+    padding: 16px 32px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+  }
+
+  .logoMobile {
+    display: block;
+    width: 182px;
+    height: 17px;
+  }
+
+  .logoDesktop {
+    display: none;
+  }
+
+  .desktopNav,
+  .desktopLogoutBtn,
+  .desktopThemeToggle {
+    display: flex;
   }
 
   .burgerBtn {
-    display: flex; /* Показуємо бургер поруч із UserBar */
+    display: none;
+  }
+}
+
+/* =========================================================
+   3. DESKTOP (1280px+)
+   ========================================================= */
+@media screen and (min-width: 1440px) {
+  .header {
+    padding-top: 30px;
+  }
+
+  .logoMobile {
+    display: none;
+  }
+
+  .logoDesktop {
+    display: block;
+    width: 182px;
+    height: 17px;
+  }
+
+  .desktopNav,
+  .desktopLogoutBtn,
+  .desktopThemeToggle {
+    display: flex;
+  }
+
+  .burgerBtn {
+    display: none;
   }
 }

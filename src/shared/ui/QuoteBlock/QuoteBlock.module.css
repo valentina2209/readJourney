@@ -1,0 +1,44 @@
+.quoteCard {
+  display: none;
+}
+
+@media screen and (min-width: 1440px) {
+  .quoteCard {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 20px;
+    background-color: #262626;
+    border-radius: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .booksImage {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .text {
+    font-family: var(--font-main);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.28;
+    letter-spacing: -0.02em;
+    color: var(--text-muted, #686868);
+    margin: 0;
+  }
+
+  .highlight {
+    color: var(--text-main, #f9f9f9);
+    font-weight: 500;
+  }
+}

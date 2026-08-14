@@ -9,7 +9,6 @@ import { Button } from '@/shared/ui/button/Button';
 import { ThemeToggle } from '@/shared/ui/ThemeToggle';
 import styles from './Header.module.css';
 
-
 export const Header = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -26,46 +25,56 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.container}>
-        {/* Logo */}
-        <Link to={ROUTES.RECOMMENDED} className={styles.logoLink}>
-          <picture>
-            <source media="(min-width: 768px)" srcSet="/images/logodes.png" />
-            <img 
-              src="/images/logomob.png" 
-              alt="Read Journey Logo" 
-              className={styles.logoImg}
-            />
-          </picture>
-        </Link>
-
-        <ThemeToggle />
-
-        {/* Навігація для Tablet/Desktop */}
-        <div className={styles.desktopNav}>
-          <UserNav />
-        </div>
-
-        {/* Права частина: UserBar + Logout (для Tablet/Desktop) + Бургер (Mobile) */}
-        <div className={styles.userSection}>
-          <UserBar />
-
-          {/* Кнопка Log out для Планшета й Десктопа */}
-          <Button variant="outline" onClick={handleLogout} className={styles.desktopLogoutBtn}>
-            Log out
-          </Button>
-
-          {/* Кнопка відкриття бургер-меню (Тільки Mobile) */}
-          <button
-            type="button"
-            className={styles.burgerBtn}
-            onClick={toggleMenu}
-            aria-label="Open menu"
-          >
-            <svg className={styles.burgerIcon}>
-              <use href="/icons.svg#icon-burger" />
+      {/* Використовуємо глобальний container + внутрішній блок headerContent */}
+      <div className="container">
+        <div className={styles.headerContent}>
+          {/* Logo */}
+          <Link to={ROUTES.RECOMMENDED} className={styles.logoLink}>
+            <svg className={styles.logoMobile}>
+              <use href="/logo.svg" />
             </svg>
-          </button>
+            <svg className={styles.logoDesktop}>
+              <use href="/logo-full.svg" />
+            </svg>
+          </Link>
+
+          {/* Навігація для Tablet/Desktop */}
+          <div className={styles.desktopNav}>
+            <UserNav />
+          </div>
+
+           {/* ThemeToggle для Tablet/Desktop */}
+          <div className={styles.desktopThemeToggle}>
+              <ThemeToggle />
+          </div>
+          
+          {/* Права частина: UserBar + Logout + Бургер (Mobile) */}
+          <div className={styles.userSection}>
+            <UserBar />
+
+           
+
+            {/* Кнопка Log out для Tablet/Desktop */}
+            <Button
+              variant="outline"
+              onClick={handleLogout}
+              className={styles.desktopLogoutBtn}
+            >
+              Log out
+            </Button>
+
+            {/* Кнопка відкриття бургер-меню (Тільки Mobile) */}
+            <button
+              type="button"
+              className={styles.burgerBtn}
+              onClick={toggleMenu}
+              aria-label="Open menu"
+            >
+              <svg className={styles.burgerIcon}>
+                <use href="/icons.svg#icon-burger" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -73,7 +82,7 @@ export const Header = () => {
       {isMenuOpen && (
         <div className={styles.mobileOverlay}>
           <div className={styles.mobileMenu}>
-            {/* Кнопка закриття меню (Хрестик у правому верхньому кутку) */}
+            {/* Кнопка закриття меню */}
             <button
               type="button"
               className={styles.closeBtn}
@@ -90,10 +99,19 @@ export const Header = () => {
               <UserNav onItemClick={() => setIsMenuOpen(false)} />
             </div>
 
-            {/* Кнопка Log out внизу */}
-            <Button variant="outline" onClick={handleLogout} className={styles.mobileLogoutBtn}>
-              Log out
-            </Button>
+            {/* Нижня частина меню: ThemeToggle + Log out */}
+            <div className={styles.mobileMenuFooter}>
+              <div className={styles.mobileThemeToggle}>
+                <ThemeToggle />
+              </div>
+              <Button
+                variant="outline"
+                onClick={handleLogout}
+                className={styles.mobileLogoutBtn}
+              >
+                Log out
+              </Button>
+            </div>
           </div>
         </div>
       )}
