@@ -7,6 +7,7 @@ export const apiClient = axios.create({
     },
 });
 
+// 1. Request Interceptor
 apiClient.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
@@ -15,7 +16,7 @@ apiClient.interceptors.request.use(
             config.headers.Authorization = `Bearer ${token}`;
         } else if (config.headers) {
             delete config.headers.Authorization;
-        }
+        }   
     
         return config;
     },
@@ -24,19 +25,20 @@ apiClient.interceptors.request.use(
     }
 );
 
+// 2. Response Interceptor (Без циклічного refresh)
 apiClient.interceptors.response.use(
-    (response) => {
-        return response;
-    },
+    (response) => response,
     (error) => {
         if (error.response && error.response.status === 401) {
+            // Очищаємо застарілі токени
             localStorage.removeItem('token');
+            localStorage.removeItem('refreshToken');
 
+            // Якщо ми ще не на сторінці входу — перенаправляємо
             if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
                 window.location.href = '/login';
             }
         }
-
         return Promise.reject(error);
     }
-)
+);

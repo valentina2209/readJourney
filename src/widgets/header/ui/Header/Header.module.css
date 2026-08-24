@@ -104,6 +104,7 @@
   width: 28px;
   height: 28px;
   stroke: var(--text-main, #ffffff);
+  fill: #ffffff;
 }
 
 .mobileNavWrapper {

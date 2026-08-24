@@ -46,6 +46,7 @@
 
 .closeIcon {
   stroke: var(--text-main);
+  fill: var(--text-main);
   transition: stroke 0.2s ease;
 }
 

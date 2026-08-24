@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../shared/model/hooks';
-import styles from './RecommendedPage.module.css';
-import { Filters, type FiltersFormData } from '../../../features/filters';
-import { fetchRecommendedBooks } from '../../../entities/book';
-import { Dashboard } from '../../../widgets/Dashboard/Dashboard';
-import { RecommendedGuide } from '../../../widgets/RecommendedGuide/ui/RecommendedGuide';
-import { QuoteBlock } from '../../../shared/ui/QuoteBlock/QuoteBlock';
-import { RecommendedBooks } from '../../../widgets/RecommendedBooks';
+import { useAppDispatch, useAppSelector } from '@/shared/model/hooks';
+import { fetchRecommendedBooks } from '@/entities/book';
+import { Dashboard } from '@/widgets/Dashboard/Dashboard';
+import { RecommendedGuide } from '@/widgets/RecommendedGuide/ui/RecommendedGuide';
+import { QuoteBlock } from '@/shared/ui/QuoteBlock/QuoteBlock';
+import { RecommendedBooks } from '@/widgets/RecommendedBooks';
+import { BookForm, BookFormValues } from '@/features/bookForm';
+
+import styles from './RecommendedPage.module.css'
 
 export const RecommendedPage = () => {
   const dispatch = useAppDispatch();
   const { books, totalPages } = useAppSelector((state) => state.books.recommended);
 
   const [page, setPage] = useState(1);
-  const [filters, setFilters] = useState<FiltersFormData>({ title: '', author: '' });
+  const [filters, setFilters] = useState<BookFormValues>({ title: '', author: '' });
 
   useEffect(() => {
     dispatch(
@@ -26,7 +27,7 @@ export const RecommendedPage = () => {
     )
   }, [dispatch, page, filters])
 
-  const handleApplyFilters = (data: FiltersFormData) => {
+  const handleApplyFilters = (data: BookFormValues) => {
     setFilters(data);
     setPage(1);
   }
@@ -36,7 +37,7 @@ export const RecommendedPage = () => {
       <div className={styles.wrapper}>
          <Dashboard>
           <div className={styles.dashboard}>
-            <Filters onApplyFilters={handleApplyFilters} />
+            <BookForm mode='filter' onFilterSubmit={handleApplyFilters} />
             <RecommendedGuide />
             <QuoteBlock />
           </div>

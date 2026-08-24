@@ -26,6 +26,9 @@ export const registerThunk = createAsyncThunk<
         if (data.token) {
             localStorage.setItem('token', data.token);
         }
+        if (data.refreshToken) {
+            localStorage.setItem('refreshToken', data.refreshToken)
+        }
         
         toast.success('Реєстрація успішна!');
         return data;
@@ -55,6 +58,9 @@ export const loginThunk = createAsyncThunk<
         if (data.token) {
             localStorage.setItem('token', data.token);
         }
+        if (data.refreshToken) {
+            localStorage.setItem('refreshToken', data.refreshToken);
+        }
         
         toast.success('Авторизація успішна!');
         return data;
@@ -78,10 +84,12 @@ export const logoutThunk = createAsyncThunk<void, void, { rejectValue: string }>
             await apiClient.post('/users/signout');
 
             localStorage.removeItem('token');
+            localStorage.removeItem('refreshToken');
 
             toast.success('Ви успішно вийшли з акаунту');
         } catch (error: unknown) {
             localStorage.removeItem('token');
+            localStorage.removeItem('refreshToken');
 
             let errorMessage = 'Помилка під час виходу з сесії';
             if (axios.isAxiosError(error)) {
@@ -101,7 +109,15 @@ export const refreshUserThunk = createAsyncThunk <
     { rejectValue: string }
     >('auth/refresh', async (_, { rejectWithValue }) => {
         try {
-            const { data } = await apiClient.get<User>('/users/current');
+            const { data } = await apiClient.get<User & { token?: string;  refreshToken?: string}>('/users/current');
+            
+            if (data.token) {
+                localStorage.setItem('token', data.token);
+            }
+            if (data.refreshToken) {
+                localStorage.setItem('refreshToken', data.refreshToken);
+            }
+            
             return data;
         } catch (error) {
             if (axios.isAxiosError(error)) {

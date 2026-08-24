@@ -1,28 +1,31 @@
+/* ==========================================
+   MOBILE FIRST (Base styles: Mobile ~320px+)
+   ========================================== */
+
 .librarySection {
-  background-color: var(--bg-surface, #1f1f1f);
+  background-color: #1f1f1f;
   border-radius: 30px;
-  padding: 40px;
-  min-height: 500px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Header */
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 
 .title {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 700;
-  color: var(--text-main, #ffffff);
+  color: #fcfcfc;
   margin: 0;
 }
 
-/* Custom Select */
 .selectWrapper {
   position: relative;
   display: inline-block;
@@ -32,11 +35,11 @@
   appearance: none;
   -webkit-appearance: none;
   background-color: transparent;
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+  border: 1px solid #3e3e3e;
   border-radius: 12px;
-  padding: 12px 36px 12px 16px;
+  padding: 10px 36px 10px 14px;
+  color: #fcfcfc;
   font-size: 14px;
-  color: var(--text-main, #ffffff);
   cursor: pointer;
   outline: none;
   transition: border-color 0.2s ease;
@@ -44,90 +47,121 @@
 
 .select:hover,
 .select:focus {
-  border-color: var(--border-hover, rgba(255, 255, 255, 0.5));
+  border-color: #68ce67;
 }
 
 .select option {
-  background-color: var(--bg-card, #262626);
-  color: var(--text-main, #ffffff);
+  background-color: #1f1f1f;
+  color: #fcfcfc;
 }
 
-.arrowIcon {
+.selectChevron {
   position: absolute;
   right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 10px;
-  color: var(--text-main, #ffffff);
+  top: 30%;
+  transform: rotate(450deg);
+  width: 16px;
+  height: 16px;
   pointer-events: none;
+  fill: none;
+  stroke: #fcfcfc;
 }
 
 /* Empty State */
 .emptyState {
-  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-grow: 1;
+  padding: 40px 0;
   text-align: center;
-  max-width: 274px;
 }
 
 .iconCircle {
   width: 100px;
   height: 100px;
-  background-color: var(--bg-card, #262626);
   border-radius: 50%;
+  background-color: #262626;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.booksImage {
-  object-fit: contain;
+.booksIcon {
+  width: 50px;
+  height: 50px;
+  fill: none;
+  stroke: #68ce67;
 }
 
 .emptyText {
+  color: #686868;
   font-size: 14px;
-  line-height: 1.28;
-  color: var(--text-main, #ffffff);
+  line-height: 1.4;
+  max-width: 274px;
   margin: 0;
 }
 
 .highlight {
-  color: var(--text-muted, #686868);
+  color: #fcfcfc;
+  font-weight: 500;
 }
 
-/* Books Grid (коли є книги) */
+/* Books Grid & Cards */
 .booksGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(137px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   list-style: none;
   padding: 0;
   margin: 0;
+  overflow-y: auto;
 }
 
 .bookCard {
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+.bookCard:hover {
+  transform: translateY(-4px);
+}
+
+.coverWrapper {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #262626;
+  margin-bottom: 8px;
 }
 
 .cover {
   width: 100%;
-  height: 208px;
-  border-radius: 8px;
+  height: 100%;
   object-fit: cover;
-  margin-bottom: 8px;
+}
+
+.bookInfo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.textDetails {
+  overflow: hidden;
 }
 
 .bookTitle {
   font-size: 14px;
   font-weight: 700;
-  color: var(--text-main, #ffffff);
-  margin: 0 0 2px 0;
+  color: #fcfcfc;
+  margin: 0 0 4px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -135,9 +169,71 @@
 
 .bookAuthor {
   font-size: 12px;
-  color: var(--text-muted, #686868);
+  color: #686868;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.deleteBtn {
+  background: #262626;
+  border: 1px solid #3e3e3e;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.deleteBtn:hover {
+  background-color: #e850501a;
+  border-color: #e85050;
+}
+
+.trashIcon {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: #e85050;
+}
+
+/* ==========================================
+   TABLET (768px+)
+   ========================================== */
+@media (min-width: 768px) {
+  .librarySection {
+    padding: 40px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .booksGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+}
+
+/* ==========================================
+   DESKTOP (1280px+)
+   ========================================== */
+@media (min-width: 1280px) {
+  .librarySection {
+    height: 100%;
+    flex-grow: 1;
+  }
+
+  .booksGrid {
+    grid-template-columns: repeat(5, 1fr);
+    max-height: 540px;
+  }
 }

@@ -17,7 +17,7 @@ export const DashboardRecommended = ({ books = [] }: DashboardRecommendedProps) 
                 {previewBooks.map((book) => (
                     <li key={book._id} className={styles.bookItem}>
                         <img
-                            src={book.imageUrl || '/images/default-cover.png'}
+                            src={book.imageUrl || '/images/default-cover.jpg'}
                             alt={book.title}
                             className={styles.cover}
                             loading="lazy"

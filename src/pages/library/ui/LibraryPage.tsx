@@ -1,26 +1,22 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/shared/model/hooks';
 import { Book,  fetchOwnBooks,  selectIsLibraryLoading,  selectOwnBooks,  selectRecommendedBooks } from '@/entities/book';
-import { AddBookForm } from '@/features/addBook';
 import { DashboardRecommended } from '@/widgets/DashboardRecommended';
 import { MyLibraryBooks } from '@/widgets/my-library-books/ui/MyLibraryBooks';
 import { Modal } from '@/shared/ui/Modal/Modal';
+import { BookForm } from '@/features/bookForm';
+import { Dashboard } from '@/widgets/Dashboard/Dashboard';
 
-import styles from './LibraryPage.module.css';
-
-// interface LibraryPageProps {
-//   ownBooks: Book[];
-//   isLoading: boolean;
-//   // handleFilterChange: (filter: string) => void;
-// }
+import styles from '../../recommended/ui/RecommendedPage.module.css'
+import css from './LibraryPage.module.css';
 
 export const LibraryPage = () => {
   const dispatch = useAppDispatch();
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
-  const ownBooks = useAppSelector(selectOwnBooks); // або (state) => state.books.library.books
-  const isLoading = useAppSelector(selectIsLibraryLoading); // або (state) => state.books.library.isLoading
+  const ownBooks = useAppSelector(selectOwnBooks); 
+  const isLoading = useAppSelector(selectIsLibraryLoading); 
   const recommendedBooks = useAppSelector(selectRecommendedBooks);
  
   useEffect(() => {
@@ -33,18 +29,20 @@ export const LibraryPage = () => {
 
   return (
     <div className="container">
-      <div className={styles.pageWrapper}>
-        <h1 className={styles.visuallyHidden}>Library Page</h1>
-
-        <aside className={styles.sidebar}>
-          <AddBookForm onSuccess={() => setIsSuccessModalOpen(true)} />
-          
-          <div className={styles.recommendedBox}>
-            <DashboardRecommended books={recommendedBooks} />
+      <div className={styles.wrapper}>
+        {/* <h1 className={styles.visuallyHidden}>Library Page</h1> */}
+        <Dashboard>
+          <div className={styles.dashboard}>
+            <BookForm
+              mode='add'
+              onAddSuccess={() => setIsSuccessModalOpen(true)}
+            />
+            <DashboardRecommended books={recommendedBooks} /> 
           </div>
-        </aside>
+        </Dashboard>
+       
 
-        <main className={styles.mainContent}>
+        <div className={css.librarySection}>
           {isLoading ? (
             // Add to spinner
           <p>Loading your library...</p>
@@ -55,7 +53,7 @@ export const LibraryPage = () => {
               onBookClick={(book) => setSelectedBook(book)}
             />
         )}
-        </main>
+        </div>
 
         <Modal 
           isOpen={isSuccessModalOpen}
@@ -93,11 +91,11 @@ export const LibraryPage = () => {
                     srcSet={
                       selectedBook.imageUrl 
                         ? `${selectedBook.imageUrl} 1x` 
-                        : '/images/default-cover.png 1x, /images/default-cover@2x.png 2x'
+                        : '/images/default-cover.jpg'
                     } 
                   />
                   <img
-                    src={selectedBook.imageUrl || '/images/default-cover.png'}
+                    src={selectedBook.imageUrl || '/images/default-cover.jpg'}
                     alt={selectedBook.title}
                     className={styles.bookCover}
                     loading="lazy"

@@ -1,8 +1,9 @@
+import React, { useState } from "react";
 import { Book } from "@/entities/book";
 import { deleteBook } from "@/entities/book/model/operations";
 import { BOOK_STATUS_OPTIONS } from "@/entities/book/model/types";
 import { useAppDispatch } from "@/shared/model/hooks";
-import React, { useState } from "react";
+
 import styles from "./MyLibraryBooks.module.css"
 
 interface MyLibraryBooksProps {
@@ -11,11 +12,7 @@ interface MyLibraryBooksProps {
     onBookClick: (book: Book) => void;
 }
 
-export const MyLibraryBooks: React.FC<MyLibraryBooksProps> = ({
-    books,
-    onFilterChange,
-    onBookClick,
-}) => {
+export const MyLibraryBooks = ({ books, onFilterChange, onBookClick }: MyLibraryBooksProps) => {
     const dispatch = useAppDispatch();
     const [selectedStatus, setSelectedStatus] = useState<string>('all');
     
@@ -47,15 +44,17 @@ export const MyLibraryBooks: React.FC<MyLibraryBooksProps> = ({
                             </option>
                         ))}
                     </select>  
-                </div>
-                
+                    <svg className={styles.selectChevron}>
+                        <use href="/icons.svg#icon-arrow-right" />
+                    </svg>
+                </div> 
             </header>
 
             {books.length === 0 ? (
                 <div className={styles.emptyState}> 
                     <div className={styles.iconCircle}>
                         <picture>
-                            <source srcSet='/images/books@1x.webp 1x, /images/books@2x.webp 2x' />
+                            <source srcSet='/images/books.png' />
                             <img
                                 src='/images/books.png'
                                 alt='Books'
@@ -80,20 +79,27 @@ export const MyLibraryBooks: React.FC<MyLibraryBooksProps> = ({
                                 className={styles.bookCard}
                                 onClick={() => onBookClick(book)}
                             >
-                                <img
-                                    src={book.imageUrl}
-                                    alt={book.title}
-                                    className={styles.cover}
-                                />
-                                <div>
-                                    <h3 className={styles.bookTitle}>{book.title}</h3>
-                                    <p className={styles.bookAuthor}>{book.author}</p>
+                                <div className={styles.coverWrapper}>
+                                    <img
+                                        src={book.imageUrl}
+                                        alt={book.title}
+                                        className={styles.cover}
+                                    /> 
+                                </div>
+                                <div className={styles.bookInfo}>
+                                    <div className={styles.textDetails}>
+                                       <h3 className={styles.bookTitle}>{book.title}</h3>
+                                        <p className={styles.bookAuthor}>{book.author}</p>  
+                                    </div>
                                     <button
                                         type="button"
+                                        className={styles.deleteBtn}
                                         aria-label="Delete book"
                                         onClick={(e) => handleDelete(e, book._id)}
                                     >
-                                        🗑️
+                                        <svg className={styles.trashIcon}>
+                                            <use href="/icons.svg#icon-trash" />
+                                        </svg>
                                     </button> 
                                 </div>
                             </li>
