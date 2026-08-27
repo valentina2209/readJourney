@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Book } from "@/entities/book";
+import { Book, BookCard } from "@/entities/book";
 import { deleteBook } from "@/entities/book/model/operations";
 import { BOOK_STATUS_OPTIONS } from "@/entities/book/model/types";
 import { useAppDispatch } from "@/shared/model/hooks";
@@ -75,23 +75,11 @@ export const MyLibraryBooks = ({ books, onFilterChange, onBookClick }: MyLibrary
                     <ul className={styles.booksGrid}>
                         {books.map((book) => (
                             <li
-                                key={book._id}
-                                className={styles.bookCard}
-                                onClick={() => onBookClick(book)}
+                            key={book._id}
+                            className={styles.bookCard}
                             >
-                                <div className={styles.coverWrapper}>
-                                    <img
-                                        src={book.imageUrl}
-                                        alt={book.title}
-                                        className={styles.cover}
-                                    /> 
-                                </div>
-                                <div className={styles.bookInfo}>
-                                    <div className={styles.textDetails}>
-                                       <h3 className={styles.bookTitle}>{book.title}</h3>
-                                        <p className={styles.bookAuthor}>{book.author}</p>  
-                                    </div>
-                                    <button
+                            <BookCard book={book} onClick={() => onBookClick(book)}>
+                                   <button
                                         type="button"
                                         className={styles.deleteBtn}
                                         aria-label="Delete book"
@@ -100,8 +88,11 @@ export const MyLibraryBooks = ({ books, onFilterChange, onBookClick }: MyLibrary
                                         <svg className={styles.trashIcon}>
                                             <use href="/icons.svg#icon-trash" />
                                         </svg>
-                                    </button> 
-                                </div>
+                                    </button>   
+                                    
+                            </BookCard>
+
+                          
                             </li>
                         ))}
                     </ul>

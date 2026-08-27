@@ -4,9 +4,10 @@ import styles from './BookCard.module.css';
 interface BookCardProps {
   book: Book;
   onClick: () => void;
+  children?: React.ReactNode;
 }
 
-export const BookCard = ({ book, onClick }: BookCardProps) => {
+export const BookCard = ({ book, onClick, children }: BookCardProps) => {
   return (
     <div className={styles.card}>
       <div 
@@ -26,12 +27,15 @@ export const BookCard = ({ book, onClick }: BookCardProps) => {
       </div>
 
       <div className={styles.details}>
-        <h3 className={styles.title} title={book.title}>
-          {book.title}
-        </h3>
-        <p className={styles.author} title={book.author}>
-          {book.author}
-        </p>
+        <div className={styles.detailsWrapper}>
+          <h3 className={styles.title} title={book.title}>
+            {book.title}
+          </h3>
+          <p className={styles.author} title={book.author}>
+            {book.author}
+          </p>
+        </div>
+        {children}
       </div>
     </div>
   );

@@ -111,19 +111,24 @@
 
 /* Books Grid & Cards */
 .booksGrid {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0;
+  /* display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   list-style: none;
   padding: 0;
   margin: 0;
-  overflow-y: auto;
+  overflow-y: auto; */
 }
 
 .bookCard {
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  align-items: center;
   transition: transform 0.2s ease;
 }
 
@@ -132,7 +137,7 @@
 }
 
 .coverWrapper {
-  width: 100%;
+  width: 295px;
   aspect-ratio: 2 / 3;
   border-radius: 8px;
   overflow: hidden;
@@ -154,7 +159,9 @@
 }
 
 .textDetails {
-  overflow: hidden;
+  /* overflow: hidden; */
+  max-width: 295px;
+  min-width: 0;
 }
 
 .bookTitle {
@@ -162,6 +169,7 @@
   font-weight: 700;
   color: #fcfcfc;
   margin: 0 0 4px 0;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -218,8 +226,7 @@
   }
 
   .booksGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
+    flex-direction: row;
   }
 }
 
@@ -230,10 +237,5 @@
   .librarySection {
     height: 100%;
     flex-grow: 1;
-  }
-
-  .booksGrid {
-    grid-template-columns: repeat(5, 1fr);
-    max-height: 540px;
   }
 }
