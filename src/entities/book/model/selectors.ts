@@ -1,4 +1,4 @@
-import { RootState } from '@/app/store/store'; // Перевір шлях до RootState
+import { RootState } from '@/app/store/store'; 
 
 // 1. Селектори для Recommended (Рекомендованих книг)
 export const selectRecommendedBooks = (state: RootState) =>
@@ -26,3 +26,13 @@ export const selectIsLibraryLoading = (state: RootState) =>
 
 export const selectLibraryError = (state: RootState) =>
   state.books.library.error;
+
+// 3.Селектори для Reading (Поточної книги та читання)
+export const selectCurrentBook = (state: RootState) =>
+  state.books.currentBook;
+
+export const selectIsCurrentBookLoading = (state: RootState) =>
+  state.books.isLoading;
+
+export const selectCurrentBookError = (state: RootState) =>
+  state.books.error;

@@ -2,11 +2,6 @@ import axios from "axios";
 import type { Book } from "./types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { apiClient } from "@/shared/api/apiClient";
-// import { RootState } from "@/app/store/store";
-
-// export const instance = axios.create({
-//     baseURL: import.meta.env.VITE_API_BASE_URL,
-// });
 
 interface FetchRecommendedParams {
     page?: number;
@@ -28,13 +23,21 @@ export interface AddBookPayload {
     totalPages: number;
 }
 
-// export const setAuthHeader = (token: string) => {
-//     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-// };
+export interface StartReadingPayload {
+    id: string;
+    page: number;
+}
 
-// export const clearAuthHeader = () => {
-//     instance.defaults.headers.common.Authorization = '';
-// };
+export interface FinishReadingPayload {
+    id: string;
+    page: number; 
+}
+
+export interface DeleteReadingPayload {
+    bookId: string;
+    readingId: string;
+}
+
 
 // 1. Отримання рекомендованих книг
 export const fetchRecommendedBooks = createAsyncThunk<
@@ -125,4 +128,82 @@ export const deleteBook = createAsyncThunk<
         }
         return rejectWithValue('An unexpected error occurred');
     }
+});
+
+// 6. Отримання детальної інформації про книгу за її ID
+export const fetchBookById = createAsyncThunk<
+    Book,
+    string,
+    { rejectValue: string }
+>('books/fetchById', async (bookId, { rejectWithValue }) => {
+    try {
+        const { data } = await apiClient.get<Book>(`/books/${bookId}`);
+        return data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            return rejectWithValue(
+                error.response?.data?.message || "Failed to fetch book info"
+            );
+        }
+        return rejectWithValue('An unexpected error occurred');
+    }
+});
+
+// 7. Початок читання книги
+export const startReading = createAsyncThunk<
+    Book,
+    StartReadingPayload,
+    { rejectValue: string }
+>('books/startReading', async (payload, { rejectWithValue }) => {
+    try {
+        const { data } = await apiClient.post<Book>('/books/reading/start', payload);
+        return data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            return rejectWithValue(
+                error.response?.data?.message || "Failed to start reading"
+            )
+        }
+        return rejectWithValue('An unexpected error occurred');
+    }
+});
+
+// 8. Завершення сесії читання
+export const finishReading = createAsyncThunk<
+  Book,
+  FinishReadingPayload,
+  { rejectValue: string }
+>('books/finishReading', async (payload, { rejectWithValue }) => {
+  try {
+    const { data } = await apiClient.post<Book>('/books/reading/finish', payload);
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue(
+        error.response?.data?.message || 'Failed to finish reading'
+      );
+    }
+    return rejectWithValue('An unexpected error occurred');
+  }
+});
+
+// 9. Видалення запису про читання зі щоденника
+export const deleteReadingProgress = createAsyncThunk<
+  Book,
+  DeleteReadingPayload,
+  { rejectValue: string }
+>('books/deleteProgress', async ({ bookId, readingId }, { rejectWithValue }) => {
+  try {
+    const { data } = await apiClient.delete<Book>('/books/reading', {
+      params: { bookId, readingId },
+    });
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue(
+        error.response?.data?.message || 'Failed to delete reading progress'
+      );
+    }
+    return rejectWithValue('An unexpected error occurred');
+  }
 });

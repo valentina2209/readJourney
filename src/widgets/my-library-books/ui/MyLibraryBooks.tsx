@@ -75,10 +75,10 @@ export const MyLibraryBooks = ({ books, onFilterChange, onBookClick }: MyLibrary
                     <ul className={styles.booksGrid}>
                         {books.map((book) => (
                             <li
-                            key={book._id}
-                            className={styles.bookCard}
+                                key={book._id}
+                                className={styles.bookCard}
                             >
-                            <BookCard book={book} onClick={() => onBookClick(book)}>
+                                <BookCard book={book} onClick={() => onBookClick(book)}>
                                    <button
                                         type="button"
                                         className={styles.deleteBtn}
@@ -89,10 +89,7 @@ export const MyLibraryBooks = ({ books, onFilterChange, onBookClick }: MyLibrary
                                             <use href="/icons.svg#icon-trash" />
                                         </svg>
                                     </button>   
-                                    
-                            </BookCard>
-
-                          
+                                </BookCard>
                             </li>
                         ))}
                     </ul>

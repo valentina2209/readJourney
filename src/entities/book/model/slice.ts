@@ -1,11 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import type { Book } from "./types"
 import {
     addToLibrary,
     createBook,
     deleteBook,
+    deleteReadingProgress,
+    fetchBookById,
     fetchOwnBooks,
-    fetchRecommendedBooks
+    fetchRecommendedBooks,
+    finishReading,
+    startReading
 } from "./operations";
 
 interface BooksState {
@@ -21,7 +25,10 @@ interface BooksState {
         books: Book[];
         isLoading: boolean;
         error: string | null;
-    }
+    };
+    currentBook: Book | null;
+    isLoading: boolean;
+    error: string | null;
 }
 
 const initialState: BooksState = {
@@ -38,12 +45,22 @@ const initialState: BooksState = {
         isLoading: false,
         error: null,
     },
+    currentBook: null,
+    isLoading: false,
+    error: null,
 };
 
 export const booksSlice = createSlice({
     name: 'books',
     initialState,
-    reducers: {},
+    reducers: {
+        setCurrentBook: (state, action) => {
+            state.currentBook = action.payload;
+        },
+        clearCurrentBook: (state) => {
+            state.currentBook = null;
+        },
+    },
     extraReducers: (builder) => {
         builder
             // Recommended books
@@ -131,8 +148,48 @@ export const booksSlice = createSlice({
             .addCase(deleteBook.rejected, (state, action) => {
                 state.library.isLoading = false;
                 state.library.error = (action.payload as string) || 'Failed to delete book';
-            });
+            })
+        
+            // Current Book & Reading Operations
+            .addMatcher(
+                isAnyOf(
+                    fetchBookById.pending,
+                    startReading.pending,
+                    finishReading.pending,
+                    deleteReadingProgress.pending
+                ),
+                (state) => {
+                    state.isLoading = true;
+                    state.error = null;
+                }
+            )
+            .addMatcher(
+                isAnyOf(
+                    fetchBookById.fulfilled,
+                    startReading.fulfilled,
+                    finishReading.fulfilled,
+                    deleteReadingProgress.fulfilled
+                ),
+                (state, action) => {
+                    state.isLoading = false;
+                    state.currentBook = action.payload;
+                }
+        
+            )
+            .addMatcher(
+                isAnyOf(
+                    fetchBookById.rejected,
+                    startReading.rejected,
+                    finishReading.rejected,
+                    deleteReadingProgress.rejected
+                ),
+                (state, action) => {
+                    state.isLoading = false;
+                    state.error = (action.payload as string) || "Reading operation failed";
+                }
+            );
     },
 });
 
+export const { setCurrentBook, clearCurrentBook } = booksSlice.actions;
 export const booksReducer = booksSlice.reducer; 

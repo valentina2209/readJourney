@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/shared/model/hooks';
-import { Book,  fetchOwnBooks,  selectIsLibraryLoading,  selectOwnBooks,  selectRecommendedBooks } from '@/entities/book';
+import { Book,  fetchOwnBooks,  selectIsLibraryLoading,  selectOwnBooks,  selectRecommendedBooks, setCurrentBook } from '@/entities/book';
 import { DashboardRecommended } from '@/widgets/DashboardRecommended';
 import { MyLibraryBooks } from '@/widgets/my-library-books/ui/MyLibraryBooks';
 import { Modal } from '@/shared/ui/Modal/Modal';
@@ -9,9 +9,12 @@ import { Dashboard } from '@/widgets/Dashboard/Dashboard';
 
 import styles from '../../recommended/ui/RecommendedPage.module.css'
 import css from './LibraryPage.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export const LibraryPage = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
@@ -25,6 +28,16 @@ export const LibraryPage = () => {
   
   const handleFilterChange = (filter: string) => {
     dispatch(fetchOwnBooks(filter === 'all' ? undefined : filter));
+  };
+
+  const handleStartReading = () => {
+    if (!selectedBook) return;
+
+    dispatch(setCurrentBook(selectedBook));
+
+    setSelectedBook(null);
+
+    navigate('/reading')
   };
 
   return (
@@ -41,7 +54,6 @@ export const LibraryPage = () => {
           </div>
         </Dashboard>
        
-
         <div className={css.librarySection}>
           {isLoading ? (
             // Add to spinner
@@ -55,6 +67,7 @@ export const LibraryPage = () => {
         )}
         </div>
 
+        {/* Модалка успішного додавання книги */}
         <Modal 
           isOpen={isSuccessModalOpen}
           onClose={() => setIsSuccessModalOpen(false)}
@@ -79,6 +92,7 @@ export const LibraryPage = () => {
           </div>
         </Modal>
 
+        {/* Модалка детальної інформації про книгу */}
         <Modal 
           isOpen={Boolean(selectedBook)} 
           onClose={() => setSelectedBook(null)}
@@ -110,7 +124,7 @@ export const LibraryPage = () => {
               <button 
                 type="button" 
                 className={styles.startReadingBtn}
-                onClick={() => setSelectedBook(null)}
+                onClick={handleStartReading}
               >
                 Start reading
               </button>
