@@ -40,12 +40,17 @@ src/
 ```
 
 ## 🛠️ Встановлення та запуск
-## Клонувати репозиторій:Bash
-git clone [https://github.com/valentina2209/readJourney]
-# cd read-journey
-## Встановити залежності:Bash
-npm install
-## Запустити проєкт у режимі розробки:Bash
-npm run dev
-## Зібрати проєкт для продакшену:Bash
-npm run build
+
+1. **Клонувати репозиторій:**
+   ```bash
+   git clone https://github.com/valentina2209/readJourney.git
+   cd readJourney
+2. **Встановити залежності:**
+   ```bash
+   npm install
+3. **Запустити проєкт у режимі розробки:**
+    ```bash
+    npm run dev
+4. **Зібрати проєкт для продакшену:**
+    ```bash
+    npm run build
