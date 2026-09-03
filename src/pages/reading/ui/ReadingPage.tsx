@@ -148,10 +148,6 @@ export const ReadingPage = () => {
         </div>
       </section>
 
-      {/* {isSuccessModalOpen && (
-        <BookSuccessModal onClose={() => setIsSuccessModalOpen(false)} />
-      )} */}
-
        <Modal
           isOpen={isSuccessModalOpen}
           onClose={() => setIsSuccessModalOpen(false)}
@@ -169,9 +165,9 @@ export const ReadingPage = () => {
               />
             </picture>
 
-            <h3 className={styles.modalTitle}>Good job</h3>
-            <p className={styles.modalText}>
-              Your book is now in <span className={styles.highlightText}>the library!</span> The joy knows no bounds and now you can start your training.
+            <h3 className={styles.modalTitle}>The book is read</h3>
+          <p className={styles.modalText}>
+            It was an <span className={styles.highlightText}>exciting journey</span>, where each page revealed new horizons, and the characters became inseparable friends.
             </p>
           </div>
         </Modal>

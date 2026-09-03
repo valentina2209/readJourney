@@ -10,6 +10,7 @@ import { Dashboard } from '@/widgets/Dashboard/Dashboard';
 import styles from '../../recommended/ui/RecommendedPage.module.css'
 import css from './LibraryPage.module.css';
 import { useNavigate } from 'react-router-dom';
+import { Loader } from '@/shared/ui/Loader/Loader';
 
 export const LibraryPage = () => {
   const dispatch = useAppDispatch();
@@ -56,8 +57,7 @@ export const LibraryPage = () => {
        
         <div className={css.librarySection}>
           {isLoading ? (
-            // Add to spinner
-          <p>Loading your library...</p>
+            <Loader text='Loading your library...' />
         ) : (
             <MyLibraryBooks
               books={ownBooks || []}
@@ -98,8 +98,8 @@ export const LibraryPage = () => {
           onClose={() => setSelectedBook(null)}
         >
           {selectedBook && (
-            <div className={styles.bookModalContent}>
-              <div className={styles.coverWrapper}>
+            <div className={css.bookModalContent}>
+              <div className={css.coverWrapper}>
                 <picture>
                   <source 
                     srcSet={
@@ -111,19 +111,19 @@ export const LibraryPage = () => {
                   <img
                     src={selectedBook.imageUrl || '/images/default-cover.jpg'}
                     alt={selectedBook.title}
-                    className={styles.bookCover}
+                    className={css.bookCover}
                     loading="lazy"
                   />
                 </picture>
               </div>
 
-              <h3 className={styles.bookTitle}>{selectedBook.title}</h3>
-              <p className={styles.bookAuthor}>{selectedBook.author}</p>
-              <p className={styles.bookPages}>{selectedBook.totalPages} pages</p>
+              <h3 className={css.bookTitle}>{selectedBook.title}</h3>
+              <p className={css.bookAuthor}>{selectedBook.author}</p>
+              <p className={css.bookPages}>{selectedBook.totalPages} pages</p>
 
               <button 
                 type="button" 
-                className={styles.startReadingBtn}
+                className={css.startReadingBtn}
                 onClick={handleStartReading}
               >
                 Start reading
